@@ -1,5 +1,5 @@
 const express = require("express");
-const companion = require("../../../packages/@uppy/companion");
+const companion = require("@uppy/companion");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 
@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(
   session({
-    secret: "some-secret",
+    secret: "parapluie",
     resave: true,
     saveUninitialized: true,
   })
@@ -36,22 +36,17 @@ app.get("/", (req, res) => {
 // initialize uppy
 const uppyOptions = {
   providerOptions: {
-    google: {
-      key: "your google key",
-      secret: "your google secret",
+    dropbox: {
+      key: process.env.COMPANION_DROPBOX_KEY,
+      secret: process.env.COMPANION_DROPBOX_SECRET,
     },
-    instagram: {
-      key: "your instagram key",
-      secret: "your instagram secret",
-    },
-    // you can also add options for dropbox here
   },
   server: {
-    host: "localhost:3020",
+    host: "http://suncms-companion.herokuapp.com/",
     protocol: "http",
   },
   filePath: "./output",
-  secret: "some-secret",
+  secret: "parapluie",
   debug: true,
 };
 
